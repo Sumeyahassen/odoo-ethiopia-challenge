@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database service for Odoo
+  db:
+    image: postgres:15
+    container_name: odoo_db_challenge
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - odoo-network
+
+  # Odoo ERP service
+  web:
+    image: odoo:17.0
+    container_name: odoo_web_challenge
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./projects/water-distribution/custom_addons:/mnt/extra-addons # Will change dynamically per active project
+    networks:
+      - odoo-network
+
+volumes:
+  dbdata:
+  odoo-web-data:
+
+networks:
+  odoo-network:
+    driver: bridge
