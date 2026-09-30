@@ -1,0 +1,35 @@
+name: Odoo CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - water-distribution-dev
+      - minimarket-dev
+      - restaurant-dev
+      - clinic-dev
+      - school-dev
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment for validation
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Step 3: Check docker service availability
+      - name: Verify Docker Setup
+        run: |
+          docker --version
+          docker compose version
