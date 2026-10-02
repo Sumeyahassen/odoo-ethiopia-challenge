@@ -9,6 +9,7 @@
     'depends': ['base', 'stock', 'sale_management', 'fleet'],
     'data': [
         'security/ir.model.access.csv',
+        'data/water_sequence.xml',
         'views/water_views.xml',
     ],
     'installable': True,
