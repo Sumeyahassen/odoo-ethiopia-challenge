@@ -33,7 +33,7 @@ class WaterDispatch(models.Model):
     def create(self, vals):
         if vals.get('name', 'NEW') == 'NEW':
             vals['name'] = self.env['ir.sequence'].next_by_code('water.dispatch') or 'NEW'
-        return super(WaterDispatch, vals).create(vals)
+        return super().create(vals)
 
     @api.constrains('quantity')
     def _check_quantity(self):
