@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ========================================== -->
+    <!-- WATER ITEM VIEWS -->
+    <!-- ========================================== -->
+
+    <!-- Form View for Water Products -->
+    <record id="view_water_item_form" model="ir.ui.view">
+        <field name="name">water.item.form</field>
+        <field name="model">water.item</field>
+        <field name="arch" type="xml">
+            <form string="Water Product">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="capacity"/>
+                        <field name="unit_price"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree (List) View for Water Products -->
+    <record id="view_water_item_tree" model="ir.ui.view">
+        <field name="name">water.item.tree</field>
+        <field name="model">water.item</field>
+        <field name="arch" type="xml">
+            <tree string="Water Products">
+                <field name="name"/>
+                <field name="capacity"/>
+                <field name="unit_price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Water Products -->
+    <record id="action_water_item" model="ir.actions.act_window">
+        <field name="name">Water Products</field>
+        <field name="res_model">water.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- ========================================== -->
+    <!-- WATER DISPATCH VIEWS -->
+    <!-- ========================================== -->
+
+    <!-- Form View for Dispatches -->
+    <record id="view_water_dispatch_form" model="ir.ui.view">
+        <field name="name">water.dispatch.form</field>
+        <field name="model">water.dispatch</field>
+        <field name="arch" type="xml">
+            <form string="Dispatch Order">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dispatched,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Driver &amp; Vehicle Info">
+                            <field name="driver_name"/>
+                            <field name="truck_plate"/>
+                        </group>
+                        <group string="Trip Details">
+                            <field name="destination_city"/>
+                            <field name="dispatch_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree (List) View for Dispatches -->
+    <record id="view_water_dispatch_tree" model="ir.ui.view">
+        <field name="name">water.dispatch.tree</field>
+        <field name="model">water.dispatch</field>
+        <field name="arch" type="xml">
+            <tree string="Dispatch Orders">
+                <field name="name"/>
+                <field name="driver_name"/>
+                <field name="truck_plate"/>
+                <field name="destination_city"/>
+                <field name="dispatch_date"/>
+                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'dispatched'" decoration-success="state == 'delivered'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Dispatches -->
+    <record id="action_water_dispatch" model="ir.actions.act_window">
+        <field name="name">Dispatch Orders</field>
+        <field name="res_model">water.dispatch</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- ========================================== -->
+    <!-- MENU STRUCTURE -->
+    <!-- ========================================== -->
+
+    <!-- Root Menu -->
+    <menuitem id="menu_water_distribution_root"
+              name="Water Distribution"
+              sequence="10"/>
+
+    <!-- Sub-menu: Operations -->
+    <menuitem id="menu_water_distribution_operations"
+              name="Operations"
+              parent="menu_water_distribution_root"
+              sequence="10"/>
+
+    <!-- Menu Items under Operations -->
+    <menuitem id="menu_water_dispatch"
+              name="Dispatches"
+              parent="menu_water_distribution_operations"
+              action="action_water_dispatch"
+              sequence="10"/>
+
+    <menuitem id="menu_water_item"
+              name="Water Products"
+              parent="menu_water_distribution_operations"
+              action="action_water_item"
+              sequence="20"/>
+
+</odoo>
