@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Water Dispatch Orders -->
+        <record id="seq_water_dispatch" model="ir.sequence">
+            <field name="name">Water Dispatch Sequence</field>
+            <field name="code">water.dispatch</field>
+            <field name="prefix">DISP/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>
