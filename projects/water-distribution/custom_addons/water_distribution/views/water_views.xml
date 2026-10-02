@@ -5,7 +5,6 @@
     <!-- WATER ITEM VIEWS -->
     <!-- ========================================== -->
 
-    <!-- Form View for Water Products -->
     <record id="view_water_item_form" model="ir.ui.view">
         <field name="name">water.item.form</field>
         <field name="model">water.item</field>
@@ -22,7 +21,6 @@
         </field>
     </record>
 
-    <!-- Tree (List) View for Water Products -->
     <record id="view_water_item_tree" model="ir.ui.view">
         <field name="name">water.item.tree</field>
         <field name="model">water.item</field>
@@ -35,7 +33,6 @@
         </field>
     </record>
 
-    <!-- Action for Water Products -->
     <record id="action_water_item" model="ir.actions.act_window">
         <field name="name">Water Products</field>
         <field name="res_model">water.item</field>
@@ -47,13 +44,18 @@
     <!-- WATER DISPATCH VIEWS -->
     <!-- ========================================== -->
 
-    <!-- Form View for Dispatches -->
     <record id="view_water_dispatch_form" model="ir.ui.view">
         <field name="name">water.dispatch.form</field>
         <field name="model">water.dispatch</field>
         <field name="arch" type="xml">
             <form string="Dispatch Order">
                 <header>
+                    <button name="action_dispatch" string="Confirm Dispatch" type="object" 
+                            invisible="state != 'draft'" class="oe_highlight"/>
+                    <button name="action_deliver" string="Mark Delivered" type="object" 
+                            invisible="state != 'dispatched'" class="btn-success"/>
+                    <button name="action_cancel" string="Cancel" type="object" 
+                            invisible="state not in ('draft', 'dispatched')"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,dispatched,delivered"/>
                 </header>
                 <sheet>
@@ -72,12 +74,15 @@
                             <field name="dispatch_date"/>
                         </group>
                     </group>
+                    <group string="Cargo Details">
+                        <field name="water_item_id"/>
+                        <field name="quantity"/>
+                    </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Tree (List) View for Dispatches -->
     <record id="view_water_dispatch_tree" model="ir.ui.view">
         <field name="name">water.dispatch.tree</field>
         <field name="model">water.dispatch</field>
@@ -93,7 +98,6 @@
         </field>
     </record>
 
-    <!-- Action for Dispatches -->
     <record id="action_water_dispatch" model="ir.actions.act_window">
         <field name="name">Dispatch Orders</field>
         <field name="res_model">water.dispatch</field>
@@ -105,18 +109,15 @@
     <!-- MENU STRUCTURE -->
     <!-- ========================================== -->
 
-    <!-- Root Menu -->
     <menuitem id="menu_water_distribution_root"
               name="Water Distribution"
               sequence="10"/>
 
-    <!-- Sub-menu: Operations -->
     <menuitem id="menu_water_distribution_operations"
               name="Operations"
               parent="menu_water_distribution_root"
               sequence="10"/>
 
-    <!-- Menu Items under Operations -->
     <menuitem id="menu_water_dispatch"
               name="Dispatches"
               parent="menu_water_distribution_operations"

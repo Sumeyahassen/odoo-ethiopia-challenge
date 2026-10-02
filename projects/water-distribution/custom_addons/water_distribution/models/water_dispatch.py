@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from odoo import models, fields, api # type: ignore
+from odoo.exceptions import ValidationError # type: ignore
 
 class WaterDispatch(models.Model):
     _name = 'water.dispatch'
@@ -15,6 +17,11 @@ class WaterDispatch(models.Model):
         ('adama', 'Adama'),
     ], string='Destination City', required=True, default='addis_ababa')
     dispatch_date = fields.Date(string='Dispatch Date', default=fields.Date.today(), required=True)
+    
+    # New field to link water items being distributed
+    water_item_id = fields.Many2one('water.item', string='Water Product', required=True)
+    quantity = fields.Integer(string='Quantity Dispatched', default=1, required=True)
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('dispatched', 'Dispatched'),
@@ -27,3 +34,22 @@ class WaterDispatch(models.Model):
         if vals.get('name', 'NEW') == 'NEW':
             vals['name'] = self.env['ir.sequence'].next_by_code('water.dispatch') or 'NEW'
         return super(WaterDispatch, vals).create(vals)
+
+    @api.constrains('quantity')
+    def _check_quantity(self):
+        for record in self:
+            if record.quantity <= 0:
+                raise ValidationError("The dispatched quantity must be greater than zero!")
+
+    # Workflow Button Actions
+    def action_dispatch(self):
+        for rec in self:
+            rec.state = 'dispatched'
+
+    def action_deliver(self):
+        for rec in self:
+            rec.state = 'delivered'
+
+    def action_cancel(self):
+        for rec in self:
+            rec.state = 'cancelled'

@@ -8,7 +8,8 @@
     'category': 'Operations/Inventory',
     'depends': ['base', 'stock', 'sale_management', 'fleet'],
     'data': [
-        # Security and views xml files will be added here later
+        'security/ir.model.access.csv',
+        'views/water_views.xml',
     ],
     'installable': True,
     'application': True,
