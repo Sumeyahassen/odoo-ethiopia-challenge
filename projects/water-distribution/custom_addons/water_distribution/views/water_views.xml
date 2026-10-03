@@ -5,6 +5,7 @@
     <!-- WATER ITEM VIEWS -->
     <!-- ========================================== -->
 
+    <!-- Form View for Water Products -->
     <record id="view_water_item_form" model="ir.ui.view">
         <field name="name">water.item.form</field>
         <field name="model">water.item</field>
@@ -21,6 +22,7 @@
         </field>
     </record>
 
+    <!-- Tree (List) View for Water Products -->
     <record id="view_water_item_tree" model="ir.ui.view">
         <field name="name">water.item.tree</field>
         <field name="model">water.item</field>
@@ -33,6 +35,7 @@
         </field>
     </record>
 
+    <!-- Action for Water Products -->
     <record id="action_water_item" model="ir.actions.act_window">
         <field name="name">Water Products</field>
         <field name="res_model">water.item</field>
@@ -44,6 +47,7 @@
     <!-- WATER DISPATCH VIEWS -->
     <!-- ========================================== -->
 
+    <!-- Form View for Dispatches -->
     <record id="view_water_dispatch_form" model="ir.ui.view">
         <field name="name">water.dispatch.form</field>
         <field name="model">water.dispatch</field>
@@ -66,8 +70,8 @@
                     </div>
                     <group>
                         <group string="Driver &amp; Vehicle Info">
-                            <field name="driver_name"/>
-                            <field name="truck_plate"/>
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
                         </group>
                         <group string="Trip Details">
                             <field name="destination_city"/>
@@ -83,14 +87,15 @@
         </field>
     </record>
 
+    <!-- Tree (List) View for Dispatches -->
     <record id="view_water_dispatch_tree" model="ir.ui.view">
         <field name="name">water.dispatch.tree</field>
         <field name="model">water.dispatch</field>
         <field name="arch" type="xml">
             <tree string="Dispatch Orders">
                 <field name="name"/>
-                <field name="driver_name"/>
-                <field name="truck_plate"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
                 <field name="destination_city"/>
                 <field name="dispatch_date"/>
                 <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'dispatched'" decoration-success="state == 'delivered'"/>
@@ -98,6 +103,7 @@
         </field>
     </record>
 
+    <!-- Action for Dispatches -->
     <record id="action_water_dispatch" model="ir.actions.act_window">
         <field name="name">Dispatch Orders</field>
         <field name="res_model">water.dispatch</field>
@@ -109,15 +115,18 @@
     <!-- MENU STRUCTURE -->
     <!-- ========================================== -->
 
+    <!-- Root Menu -->
     <menuitem id="menu_water_distribution_root"
               name="Water Distribution"
               sequence="10"/>
 
+    <!-- Sub-menu: Operations -->
     <menuitem id="menu_water_distribution_operations"
               name="Operations"
               parent="menu_water_distribution_root"
               sequence="10"/>
 
+    <!-- Menu Items under Operations -->
     <menuitem id="menu_water_dispatch"
               name="Dispatches"
               parent="menu_water_distribution_operations"

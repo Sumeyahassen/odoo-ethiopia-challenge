@@ -8,17 +8,21 @@ class WaterDispatch(models.Model):
     _rec_name = 'name'
 
     name = fields.Char(string='Dispatch Reference', required=True, copy=False, readonly=True, default='NEW')
-    driver_name = fields.Char(string='Driver Name', required=True)
-    truck_plate = fields.Char(string='Truck Plate Number', required=True)
+    
+    # Relational fields for Fleet and Driver
+    vehicle_id = fields.Many2one('fleet.vehicle', string='Truck / Vehicle', required=True)
+    driver_id = fields.Many2one('hr.employee', string='Driver', required=True)
+    
     destination_city = fields.Selection([
         ('addis_ababa', 'Addis Ababa'),
         ('bahir_dar', 'Bahir Dar'),
         ('hawassa', 'Hawassa'),
         ('adama', 'Adama'),
     ], string='Destination City', required=True, default='addis_ababa')
+    
     dispatch_date = fields.Date(string='Dispatch Date', default=fields.Date.today(), required=True)
     
-    # New field to link water items being distributed
+    # Cargo details (Water product and Quantity)
     water_item_id = fields.Many2one('water.item', string='Water Product', required=True)
     quantity = fields.Integer(string='Quantity Dispatched', default=1, required=True)
 
