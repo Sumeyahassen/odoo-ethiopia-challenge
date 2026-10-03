@@ -6,7 +6,7 @@
     'sequence': 10,
     'author': 'Sumeya Hassen',
     'category': 'Operations/Inventory',
-    'depends': ['base', 'stock', 'sale_management', 'fleet'],
+    'depends': ['base', 'stock', 'sale_management', 'fleet','hr'],
     'data': [
         'security/ir.model.access.csv',
         'data/water_sequence.xml',
