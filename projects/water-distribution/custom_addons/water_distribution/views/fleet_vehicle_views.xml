@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fleet_vehicle_form_inherit_water" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit.water</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <!-- ፊልዶቹን በቀጥታ ከዋናው ፎርም ሉህ (sheet) መጀመሪያ ላይ እናስገባቸዋለን -->
+            <xpath expr="//sheet" position="inside">
+                <group string="Ethiopian Water Logistics Details">
+                    <field name="plate_prefix_category"/>
+                    <field name="water_tank_capacity_liters"/>
+                    <field name="has_sanitation_certificate"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

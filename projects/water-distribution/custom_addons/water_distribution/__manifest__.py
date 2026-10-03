@@ -11,6 +11,7 @@
         'security/ir.model.access.csv',
         'data/water_sequence.xml',
         'views/water_views.xml',
+        'views/fleet_vehicle_views.xml',
     ],
     'installable': True,
     'application': True,
