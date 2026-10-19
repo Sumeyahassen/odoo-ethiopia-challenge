@@ -1,0 +1,7 @@
+ActionCommandStart projectdocker compose up -d
+Stop project docker compose down
+Stop + delete data docker compose down -v
+View logsdocker compose logs -f web
+Restart only Odoo docker compose restart web
+Enter Odoo containerdocker exec -it addis_tradelink_odoo bash
+Update custom addonsJust restart: docker compose restart web
