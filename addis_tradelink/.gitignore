@@ -1,0 +1,67 @@
+# ========================
+# Odoo + Docker .gitignore
+# ========================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Odoo
+*.pyc
+*.pyo
+*.log
+*.pot
+*.bak
+*.swp
+*~
+.DS_Store
+
+# Filestore and sessions (very important)
+filestore/
+sessions/
+.local/
+
+# Docker volumes data (if you ever mount them locally)
+odoo-web-data/
+odoo-db-data/
+postgresql/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Environment files (important for security)
+.env
+*.env
+.env.*
+
+# Database dumps
+*.sql
+*.dump
+*.backup
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Custom (optional)
+# Uncomment if you don't want to push screenshots yet
+# docs/screenshots/
