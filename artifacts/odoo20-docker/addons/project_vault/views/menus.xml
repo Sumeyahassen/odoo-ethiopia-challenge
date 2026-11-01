@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_project_vault_root"
+              name="Project Vault"
+              sequence="25"/>
+
+    <!-- Projects -->
+    <menuitem id="menu_vault_project"
+              name="Projects"
+              parent="menu_project_vault_root"
+              action="action_vault_project"
+              sequence="10"/>
+
+    <!-- Technologies -->
+    <menuitem id="menu_vault_technology"
+              name="Technologies"
+              parent="menu_project_vault_root"
+              action="action_vault_technology"
+              sequence="20"/>
+
+    <!-- Credentials -->
+    <menuitem id="menu_vault_credential"
+              name="Credentials"
+              parent="menu_project_vault_root"
+              action="action_vault_credential"
+              sequence="30"/>
+</odoo>
