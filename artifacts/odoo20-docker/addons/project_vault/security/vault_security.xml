@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Privilege (new in Odoo 19/20) -->
+    <record id="res_groups_privilege_project_vault" model="res.groups.privilege">
+        <field name="name">Project Vault</field>
+        <field name="sequence">25</field>
+    </record>
+
+    <!-- User Group -->
+    <record id="group_vault_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="privilege_id" ref="res_groups_privilege_project_vault"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Can view projects and credentials (passwords masked by default).</field>
+    </record>
+
+    <!-- Manager Group -->
+    <record id="group_vault_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="res_groups_privilege_project_vault"/>
+        <field name="implied_ids" eval="[(4, ref('group_vault_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="comment">Full access including revealing and editing credentials.</field>
+    </record>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_vault_project_list" model="ir.ui.view">
+        <field name="name">vault.project.list</field>
+        <field name="model">vault.project</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="slug"/>
+                <field name="status"/>
+                <field name="github_url"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_vault_project_form" model="ir.ui.view">
+        <field name="name">vault.project.form</field>
+        <field name="model">vault.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="slug"/>
+                        <field name="status"/>
+                        <field name="github_url"/>
+                        <field name="live_url"/>
+                        <field name="staging_url"/>
+                        <field name="local_path"/>
+                        <field name="technology_ids" widget="many2many_tags"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_vault_project" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">vault.project</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_vault_technology_user,vault.technology.user,vault.technology,project_vault.group_vault_user,cru,
+access_vault_technology_manager,vault.technology.manager,vault.technology,project_vault.group_vault_manager,crud,
+access_vault_project_user,vault.project.user,vault.project,project_vault.group_vault_user,cru,
+access_vault_project_manager,vault.project.manager,vault.project,project_vault.group_vault_manager,crud,
+access_vault_credential_user,vault.credential.user,vault.credential,project_vault.group_vault_user,cru,
+access_vault_credential_manager,vault.credential.manager,vault.credential,project_vault.group_vault_manager,crud,

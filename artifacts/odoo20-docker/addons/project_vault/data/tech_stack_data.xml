@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="tech_react" model="vault.technology">
+        <field name="name">React</field>
+        <field name="category">frontend</field>
+        <field name="color">4</field>
+    </record>
+    <record id="tech_odoo" model="vault.technology">
+        <field name="name">Odoo</field>
+        <field name="category">backend</field>
+        <field name="color">1</field>
+    </record>
+    <record id="tech_postgresql" model="vault.technology">
+        <field name="name">PostgreSQL</field>
+        <field name="category">database</field>
+        <field name="color">4</field>
+    </record>
+    <record id="tech_docker" model="vault.technology">
+        <field name="name">Docker</field>
+        <field name="category">hosting</field>
+        <field name="color">4</field>
+    </record>
+</odoo>
