@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Project & Credential Vault (Vault18/20)",
-    "version": "20.0.1.0.0",          # ← VERSION TOKEN
+    "version": "20.0.1.0.1",          # ← VERSION TOKEN
     "category": "Project",
     "summary": "Secure multi-tech-stack project registry and encrypted credential vault",
     "depends": ["base", "mail", "web"],
