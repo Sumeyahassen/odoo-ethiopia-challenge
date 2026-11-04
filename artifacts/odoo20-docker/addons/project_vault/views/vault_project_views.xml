@@ -1,44 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- List / Tree View -->
     <record id="view_vault_project_list" model="ir.ui.view">
         <field name="name">vault.project.list</field>
         <field name="model">vault.project</field>
         <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="slug"/>
-                <field name="status"/>
-                <field name="github_url"/>
-                <field name="active"/>
+            <list string="Projects">
+                <field name="name" string="Project Name"/>
+                <field name="slug" string="Project Code"/>
+                <field name="status" widget="badge"
+                       decoration-info="status == 'development'"
+                       decoration-warning="status == 'staging'"
+                       decoration-success="status == 'active'"
+                       decoration-muted="status in ('completed', 'archived')"/>
+                <field name="technology_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="github_url" widget="url"/>
+                <field name="live_url" widget="url"/>
+                <field name="active" widget="boolean_toggle"/>
             </list>
         </field>
     </record>
 
+    <!-- Form View -->
     <record id="view_vault_project_form" model="ir.ui.view">
         <field name="name">vault.project.form</field>
         <field name="model">vault.project</field>
         <field name="arch" type="xml">
-            <form>
+            <form string="Project">
                 <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Project Name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Addis TradeLink ERP"/>
+                        </h1>
+                    </div>
                     <group>
-                        <field name="name"/>
-                        <field name="slug"/>
-                        <field name="status"/>
-                        <field name="github_url"/>
-                        <field name="live_url"/>
-                        <field name="staging_url"/>
-                        <field name="local_path"/>
-                        <field name="technology_ids" widget="many2many_tags"/>
-                        <field name="active"/>
+                        <group string="Project Information">
+                            <field name="slug" placeholder="e.g. addis-tradelink"/>
+                            <field name="status"/>
+                            <field name="technology_ids" widget="many2many_tags"
+                                   options="{'color_field': 'color', 'no_create_edit': True}"
+                                   placeholder="Select technologies..."/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                        <group string="Environments &amp; Repositories">
+                            <field name="github_url" widget="url" placeholder="https://github.com/organization/repo"/>
+                            <field name="live_url" widget="url" placeholder="https://app.example.com"/>
+                            <field name="staging_url" widget="url" placeholder="https://staging.example.com"/>
+                            <field name="local_path" placeholder="/home/username/projects/..."/>
+                        </group>
                     </group>
+                    <notebook>
+                        <page string="Credentials" name="credentials">
+                            <field name="credential_ids">
+                                <list editable="bottom">
+                                    <field name="name" string="Title / Service" placeholder="e.g. Database Root"/>
+                                    <field name="environment"/>
+                                    <field name="username" placeholder="admin"/>
+                                    <field name="password" password="True"/>
+                                    <field name="url" widget="url" placeholder="https://login.example.com"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
+    <!-- Window Action -->
     <record id="action_vault_project" model="ir.actions.act_window">
         <field name="name">Projects</field>
         <field name="res_model">vault.project</field>
         <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register a new project
+            </p>
+            <p>
+                Keep track of your project repositories, staging/live environments, tech stacks, and credentials in one secure place.
+            </p>
+        </field>
     </record>
 </odoo>
