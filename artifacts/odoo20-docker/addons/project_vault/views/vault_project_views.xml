@@ -57,7 +57,7 @@
                                     <field name="name" string="Title / Service" placeholder="e.g. Database Root"/>
                                     <field name="environment"/>
                                     <field name="username" placeholder="admin"/>
-                                    <field name="password" password="True"/>
+                                    <field name="password" placeholder="Password"/>
                                     <field name="url" widget="url" placeholder="https://login.example.com"/>
                                 </list>
                             </field>

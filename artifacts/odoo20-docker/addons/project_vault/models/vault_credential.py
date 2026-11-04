@@ -31,6 +31,11 @@ class VaultCredential(models.Model):
         string="Password / Secret",
         help="Secret password or API token",
     )
+    show_password = fields.Boolean(
+        string="Show Password",
+        default=True,
+        help="Toggle to reveal or mask the password",
+    )
     url = fields.Char(
         string="Login URL / Endpoint",
         help="Link to the login portal or API endpoint",
@@ -43,3 +48,8 @@ class VaultCredential(models.Model):
         string="Active",
         default=True,
     )
+
+    def action_toggle_password(self):
+        """Action button to toggle password visibility"""
+        for rec in self:
+            rec.show_password = not rec.show_password
