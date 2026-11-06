@@ -1,0 +1,25 @@
+{
+    'name': 'EthioBottleNet - Delivery',
+    'version': '18.0.1.0.0',
+    'category': 'Inventory/Delivery',
+    'summary': 'Delivery Orders, Routes and Vehicle Assignment',
+    'depends': [
+        'ethio_bottle_base',
+        'stock',
+        'fleet',
+        'sale_management',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/delivery_security.xml',
+        'data/sequence_data.xml',
+        'views/ethio_delivery_order_views.xml',
+        'views/ethio_route_views.xml',
+        'wizard/assign_vehicle_wizard_views.xml',
+        'views/menu.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}
