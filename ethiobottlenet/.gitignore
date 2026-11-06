@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+*.pyo
+*.swp
+.idea/
+.vscode/
+*.log
+.env
+odoo-web-data/
+postgresql/
+*.sql
+.DS_Store
