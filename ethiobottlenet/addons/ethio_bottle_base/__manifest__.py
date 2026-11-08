@@ -7,7 +7,7 @@
         Core configurations, partners, products and multi-factory support
         for EthioBottleNet.
     """,
-    'author': 'Your Name / Company',
+    'author': 'Sumeya Hassen / Company',
     'website': 'https://www.yourwebsite.com',
     'depends': [
         'base',
