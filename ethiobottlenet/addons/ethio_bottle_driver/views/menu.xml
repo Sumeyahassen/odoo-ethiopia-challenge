@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Driver menu items -->
+    <!-- Operations -->
+    <menuitem id="menu_ethio_bottle_operations"
+              name="Operations"
+              parent="ethio_bottle_base.menu_ethio_bottle_root"
+              sequence="5"/>
+
+    <menuitem id="menu_ethio_delivery_orders"
+              name="Delivery Orders"
+              parent="menu_ethio_bottle_operations"
+              action="action_ethio_delivery_order"
+              sequence="10"/>
+
+    <menuitem id="menu_ethio_routes"
+              name="Routes"
+              parent="menu_ethio_bottle_operations"
+              action="action_ethio_route"
+              sequence="20"/>
 </odoo>
