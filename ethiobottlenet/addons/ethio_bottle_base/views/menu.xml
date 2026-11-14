@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Base menu items -->
+    <!-- Main Menu -->
+    <menuitem id="menu_ethio_bottle_root"
+              name="EthioBottleNet"
+              sequence="10"
+              web_icon="ethio_bottle_base,static/description/icon.png"/>
+
+    <!-- Master Data -->
+    <menuitem id="menu_ethio_bottle_master"
+              name="Master Data"
+              parent="menu_ethio_bottle_root"
+              sequence="10"/>
+
+    <menuitem id="menu_ethio_bottle_partners"
+              name="Customers &amp; Shops"
+              parent="menu_ethio_bottle_master"
+              action="contacts.action_contacts"
+              sequence="10"/>
+
+    <menuitem id="menu_ethio_bottle_products"
+              name="Products"
+              parent="menu_ethio_bottle_master"
+              action="product.product_template_action"
+              sequence="20"/>
+
+    <menuitem id="menu_ethio_bottle_vehicles"
+              name="Vehicles"
+              parent="menu_ethio_bottle_master"
+              action="fleet.fleet_vehicle_action"
+              sequence="30"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_ethio_bottle_config"
+              name="Configuration"
+              parent="menu_ethio_bottle_root"
+              sequence="100"/>
 </odoo>
