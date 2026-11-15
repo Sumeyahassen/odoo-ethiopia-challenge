@@ -3,8 +3,7 @@
     <!-- Main Menu -->
     <menuitem id="menu_ethio_bottle_root"
               name="EthioBottleNet"
-              sequence="10"
-              web_icon="ethio_bottle_base,static/description/icon.png"/>
+              sequence="10"/>
 
     <!-- Master Data -->
     <menuitem id="menu_ethio_bottle_master"
@@ -29,10 +28,4 @@
               parent="menu_ethio_bottle_master"
               action="fleet.fleet_vehicle_action"
               sequence="30"/>
-
-    <!-- Configuration -->
-    <menuitem id="menu_ethio_bottle_config"
-              name="Configuration"
-              parent="menu_ethio_bottle_root"
-              sequence="100"/>
 </odoo>
