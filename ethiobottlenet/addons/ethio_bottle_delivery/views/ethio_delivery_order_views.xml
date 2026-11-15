@@ -1,4 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Delivery order views -->
+
+    <!-- Tree View -->
+    <record id="view_ethio_delivery_order_tree" model="ir.ui.view">
+        <field name="name">ethio.delivery.order.tree</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="factory_id"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="planned_date"/>
+                <field name="state" widget="badge"
+                        decoration-info="state == 'draft'"
+                        decoration-warning="state == 'assigned'"
+                        decoration-primary="state == 'in_transit'"
+                        decoration-success="state == 'delivered'"
+                        decoration-danger="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_ethio_delivery_order_form" model="ir.ui.view">
+        <field name="name">ethio.delivery.order.form</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Order">
+                <header>
+                    <button name="action_assign" string="Assign" type="object"
+                            invisible="state != 'draft'" class="btn-primary"/>
+                    <button name="action_start_transit" string="Start Transit" type="object"
+                            invisible="state != 'assigned'" class="btn-primary"/>
+                    <button name="action_deliver" string="Mark Delivered" type="object"
+                            invisible="state != 'in_transit'" class="btn-primary"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state in ('delivered', 'cancelled')"/>
+                    <button name="action_draft" string="Reset to Draft" type="object"
+                            invisible="state != 'cancelled'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,assigned,in_transit,delivered"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="factory_id"/>
+                            <field name="planned_date"/>
+                        </group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                            <field name="date_done" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="quantity_delivered"/>
+                                    <field name="uom_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_ethio_delivery_order_search" model="ir.ui.view">
+        <field name="name">ethio.delivery.order.search</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Assigned" name="assigned" domain="[('state','=','assigned')]"/>
+                <filter string="In Transit" name="in_transit" domain="[('state','=','in_transit')]"/>
+                <filter string="Delivered" name="delivered" domain="[('state','=','delivered')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Factory" name="group_factory" context="{'group_by': 'factory_id'}"/>
+                    <filter string="Customer" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_ethio_delivery_order" model="ir.actions.act_window">
+        <field name="name">Delivery Orders</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Delivery Order
+            </p>
+        </field>
+    </record>
+
 </odoo>
