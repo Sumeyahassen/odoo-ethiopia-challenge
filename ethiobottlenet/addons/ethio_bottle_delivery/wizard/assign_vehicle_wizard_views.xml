@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_assign_vehicle_wizard_form" model="ir.ui.view">
+        <field name="name">assign.vehicle.wizard.form</field>
+        <field name="model">assign.vehicle.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assign Vehicle &amp; Driver">
+                <group>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                </group>
+                <footer>
+                    <button name="action_assign" string="Assign" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assign_vehicle_wizard" model="ir.actions.act_window">
+        <field name="name">Assign Vehicle</field>
+        <field name="res_model">assign.vehicle.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
