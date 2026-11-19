@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Partner views -->
+    <record id="view_partner_form_ethio_bottle" model="ir.ui.view">
+        <field name="name">res.partner.form.ethio.bottle</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="before">
+                <page string="EthioBottleNet" name="ethio_bottle">
+                    <group>
+                        <group>
+                            <field name="is_shop"/>
+                            <field name="is_driver"/>
+                            <field name="city_zone"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
 </odoo>

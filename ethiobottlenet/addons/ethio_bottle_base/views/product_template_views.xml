@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Product template views -->
+    <record id="view_product_template_form_ethio_bottle" model="ir.ui.view">
+        <field name="name">product.template.form.ethio.bottle</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="is_bottled_water"/>
+                <field name="bottle_size" invisible="not is_bottled_water"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

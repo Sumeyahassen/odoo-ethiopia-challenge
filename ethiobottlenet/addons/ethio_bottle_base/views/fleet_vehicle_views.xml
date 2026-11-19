@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Fleet vehicle views -->
+    <record id="view_fleet_vehicle_form_ethio_bottle" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.ethio.bottle</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='license_plate']" position="after">
+                <field name="is_water_truck"/>
+                <field name="capacity_bottles"/>
+                <field name="capacity_crates"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
