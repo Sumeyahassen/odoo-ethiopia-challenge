@@ -22,6 +22,17 @@ class EthioDeliveryOrder(models.Model):
         required=True,
         tracking=True
     )
+    partner_address = fields.Char(
+        string='Delivery Address',
+        compute='_compute_partner_address',
+        store=False
+    )
+    sale_order_id = fields.Many2one(
+        'sale.order',
+        string='Sales Order',
+        tracking=True,
+        copy=False
+    )
     factory_id = fields.Many2one(
         'res.company',
         string='Factory',
@@ -63,12 +74,35 @@ class EthioDeliveryOrder(models.Model):
         string='Delivery Lines'
     )
     note = fields.Text(string='Notes')
+    proof_note = fields.Text(string='Proof of Delivery / Receiver Note')
     company_id = fields.Many2one(
         'res.company',
         string='Company',
         related='factory_id',
         store=True
     )
+
+    @api.depends('partner_id')
+    def _compute_partner_address(self):
+        for rec in self:
+            if rec.partner_id:
+                rec.partner_address = rec.partner_id._display_address()
+            else:
+                rec.partner_address = False
+
+    @api.onchange('sale_order_id')
+    def _onchange_sale_order_id(self):
+        if self.sale_order_id:
+            self.partner_id = self.sale_order_id.partner_id
+            # Load products from sales order
+            lines = []
+            for line in self.sale_order_id.order_line:
+                if line.product_id and line.product_id.type != 'service':
+                    lines.append((0, 0, {
+                        'product_id': line.product_id.id,
+                        'quantity': line.product_uom_qty,
+                    }))
+            self.line_ids = lines
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -81,6 +115,8 @@ class EthioDeliveryOrder(models.Model):
         for rec in self:
             if not rec.vehicle_id or not rec.driver_id:
                 raise UserError(_('Please select Vehicle and Driver before assigning.'))
+            if not rec.line_ids:
+                raise UserError(_('Please add at least one product line.'))
             rec.state = 'assigned'
 
     def action_start_transit(self):
@@ -89,6 +125,9 @@ class EthioDeliveryOrder(models.Model):
 
     def action_deliver(self):
         for rec in self:
+            for line in rec.line_ids:
+                if not line.quantity_delivered:
+                    line.quantity_delivered = line.quantity
             rec.write({
                 'state': 'delivered',
                 'date_done': fields.Datetime.now()

@@ -9,6 +9,7 @@
             <list>
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="sale_order_id"/>
                 <field name="factory_id"/>
                 <field name="vehicle_id"/>
                 <field name="driver_id"/>
@@ -50,14 +51,16 @@
                         </h1>
                     </div>
                     <group>
-                        <group>
+                        <group string="Customer">
                             <field name="partner_id"/>
-                            <field name="factory_id"/>
-                            <field name="planned_date"/>
+                            <field name="partner_address" readonly="1"/>
+                            <field name="sale_order_id"/>
                         </group>
-                        <group>
+                        <group string="Logistics">
+                            <field name="factory_id"/>
                             <field name="vehicle_id"/>
                             <field name="driver_id"/>
+                            <field name="planned_date"/>
                             <field name="date_done" readonly="1"/>
                         </group>
                     </group>
@@ -71,6 +74,11 @@
                                     <field name="uom_id"/>
                                 </list>
                             </field>
+                        </page>
+                        <page string="Proof of Delivery" name="proof">
+                            <group>
+                                <field name="proof_note" placeholder="Receiver name, signature note, or delivery comment..."/>
+                            </group>
                         </page>
                         <page string="Notes" name="notes">
                             <field name="note"/>
@@ -90,6 +98,7 @@
             <search>
                 <field name="name"/>
                 <field name="partner_id"/>
+                <field name="sale_order_id"/>
                 <field name="vehicle_id"/>
                 <field name="driver_id"/>
                 <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
