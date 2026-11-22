@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Operations -->
     <menuitem id="menu_ethio_bottle_operations"
               name="Operations"
               parent="ethio_bottle_base.menu_ethio_bottle_root"
@@ -11,4 +10,10 @@
               parent="menu_ethio_bottle_operations"
               action="action_ethio_delivery_order"
               sequence="10"/>
+
+    <menuitem id="menu_ethio_routes"
+              name="Routes"
+              parent="menu_ethio_bottle_operations"
+              action="action_ethio_route"
+              sequence="20"/>
 </odoo>
