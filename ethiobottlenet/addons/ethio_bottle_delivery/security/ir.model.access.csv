@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_ethio_delivery_order_all,access.ethio.delivery.order.all,ethio_bottle_delivery.model_ethio_delivery_order,,1,1,1,1
-access_ethio_delivery_order_line_all,access.ethio.delivery.order.line.all,ethio_bottle_delivery.model_ethio_delivery_order_line,,1,1,1,1
-access_ethio_route_all,access.ethio.route.all,ethio_bottle_delivery.model_ethio_route,,1,1,1,1
-access_ethio_route_stop_all,access.ethio.route.stop.all,ethio_bottle_delivery.model_ethio_route_stop,,1,1,1,1
+access_ethio_delivery_order_user,ethio.delivery.order.user,model_ethio_delivery_order,base.group_user,1,1,1,1
+access_ethio_delivery_order_line_user,ethio.delivery.order.line.user,model_ethio_delivery_order_line,base.group_user,1,1,1,1
+access_ethio_route_user,ethio.route.user,model_ethio_route,base.group_user,1,1,1,1
+access_ethio_route_stop_user,ethio.route.stop.user,model_ethio_route_stop,base.group_user,1,1,1,1
