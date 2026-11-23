@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!-- Operations -->
     <menuitem id="menu_ethio_bottle_operations"
               name="Operations"
               parent="ethio_bottle_base.menu_ethio_bottle_root"
@@ -16,4 +18,53 @@
               parent="menu_ethio_bottle_operations"
               action="action_ethio_route"
               sequence="20"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_ethio_bottle_dashboard"
+              name="Dashboard"
+              parent="ethio_bottle_base.menu_ethio_bottle_root"
+              sequence="1"/>
+
+    <menuitem id="menu_ethio_delivery_dashboard"
+              name="Deliveries Analysis"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_dashboard"
+              sequence="10"/>
+
+    <menuitem id="menu_ethio_delivery_today"
+              name="Today Deliveries"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_today"
+              sequence="20"/>
+
+    <menuitem id="menu_ethio_delivery_draft"
+              name="Draft"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_draft"
+              sequence="30"/>
+
+    <menuitem id="menu_ethio_delivery_assigned"
+              name="Assigned"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_assigned"
+              sequence="40"/>
+
+    <menuitem id="menu_ethio_delivery_in_transit"
+              name="In Transit"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_in_transit"
+              sequence="50"/>
+
+    <menuitem id="menu_ethio_delivery_done"
+              name="Delivered"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_delivery_done"
+              sequence="60"/>
+
+    <menuitem id="menu_ethio_route_dashboard"
+              name="Routes Analysis"
+              parent="menu_ethio_bottle_dashboard"
+              action="action_ethio_route_dashboard"
+              sequence="70"/>
+
 </odoo>
