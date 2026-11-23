@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== GRAPH & PIVOT FOR DELIVERY ORDERS ===================== -->
+
+    <record id="view_ethio_delivery_order_graph" model="ir.ui.view">
+        <field name="name">ethio.delivery.order.graph</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="arch" type="xml">
+            <graph string="Deliveries Analysis" type="bar">
+                <field name="state"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_ethio_delivery_order_pivot" model="ir.ui.view">
+        <field name="name">ethio.delivery.order.pivot</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Deliveries Pivot">
+                <field name="state" type="row"/>
+                <field name="factory_id" type="col"/>
+                <field name="id" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ===================== GRAPH FOR ROUTES ===================== -->
+
+    <record id="view_ethio_route_graph" model="ir.ui.view">
+        <field name="name">ethio.route.graph</field>
+        <field name="model">ethio.route</field>
+        <field name="arch" type="xml">
+            <graph string="Routes Analysis" type="pie">
+                <field name="state"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- ===================== DASHBOARD ACTIONS ===================== -->
+
+    <!-- All Deliveries with graph/pivot -->
+    <record id="action_ethio_delivery_dashboard" model="ir.actions.act_window">
+        <field name="name">Deliveries Dashboard</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">graph,pivot,list,form</field>
+        <field name="context">{}</field>
+    </record>
+
+  <!-- Today Deliveries -->
+    <record id="action_ethio_delivery_today" model="ir.actions.act_window">
+        <field name="name">Today Deliveries</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain" eval="[('planned_date', '&gt;=', time.strftime('%Y-%m-%d 00:00:00'))]"/>
+        <field name="context">{}</field>
+    </record>
+    <!-- Pending / Draft -->
+    <record id="action_ethio_delivery_draft" model="ir.actions.act_window">
+        <field name="name">Draft Deliveries</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'draft')]</field>
+    </record>
+
+    <!-- Assigned -->
+    <record id="action_ethio_delivery_assigned" model="ir.actions.act_window">
+        <field name="name">Assigned Deliveries</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'assigned')]</field>
+    </record>
+
+    <!-- In Transit -->
+    <record id="action_ethio_delivery_in_transit" model="ir.actions.act_window">
+        <field name="name">In Transit</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'in_transit')]</field>
+    </record>
+
+    <!-- Delivered -->
+    <record id="action_ethio_delivery_done" model="ir.actions.act_window">
+        <field name="name">Delivered</field>
+        <field name="res_model">ethio.delivery.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'delivered')]</field>
+    </record>
+
+    <!-- Routes Dashboard -->
+    <record id="action_ethio_route_dashboard" model="ir.actions.act_window">
+        <field name="name">Routes Dashboard</field>
+        <field name="res_model">ethio.route</field>
+        <field name="view_mode">graph,list,form</field>
+    </record>
+
+</odoo>

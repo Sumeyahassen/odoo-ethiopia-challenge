@@ -15,6 +15,7 @@
     'data/sequence_data.xml',
     'views/ethio_delivery_order_views.xml',
     'views/ethio_route_views.xml',
+    'views/dashboard_views.xml',
     'views/menu.xml',
 ],
     'installable': True,
