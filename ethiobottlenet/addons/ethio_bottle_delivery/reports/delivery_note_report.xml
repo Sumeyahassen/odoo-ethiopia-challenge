@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Report Action -->
+    <record id="action_report_delivery_note" model="ir.actions.report">
+        <field name="name">Delivery Note</field>
+        <field name="model">ethio.delivery.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ethio_bottle_delivery.report_delivery_note_document</field>
+        <field name="report_file">ethio_bottle_delivery.report_delivery_note_document</field>
+        <field name="print_report_name">'Delivery Note - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_ethio_delivery_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Report Template -->
+    <template id="report_delivery_note_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <h2>Delivery Note</h2>
+                        <p>
+                            <strong>Reference:</strong>
+                            <span t-field="doc.name"/>
+                        </p>
+
+                        <div class="row mt-3 mb-3">
+                            <div class="col-6">
+                                <strong>Customer / Shop</strong><br/>
+                                <span t-field="doc.partner_id"/><br/>
+                                <span t-field="doc.partner_address"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Factory:</strong>
+                                <span t-field="doc.factory_id"/><br/>
+                                <strong>Planned Date:</strong>
+                                <span t-field="doc.planned_date"/><br/>
+                                <strong>Status:</strong>
+                                <span t-field="doc.state"/><br/>
+                                <strong>Sales Order:</strong>
+                                <span t-field="doc.sale_order_id"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <strong>Vehicle:</strong>
+                                <span t-field="doc.vehicle_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Driver:</strong>
+                                <span t-field="doc.driver_id"/>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">Delivered Qty</th>
+                                    <th>Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.line_ids" t-as="line">
+                                    <td>
+                                        <span t-field="line.product_id"/>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="line.quantity"/>
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="line.quantity_delivered"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="line.uom_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row mt-4" t-if="doc.proof_note or doc.note">
+                            <div class="col-12">
+                                <strong>Notes / Proof of Delivery</strong>
+                                <p t-field="doc.proof_note"/>
+                                <p t-field="doc.note"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <strong>Driver Signature</strong>
+                                <br/><br/><br/>
+                                ______________________
+                            </div>
+                            <div class="col-6">
+                                <strong>Receiver Signature</strong>
+                                <br/><br/><br/>
+                                ______________________
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
