@@ -9,7 +9,7 @@
         'fleet',
         'sale_management',
     ],
-    'data': [
+ 'data': [
     'security/ir.model.access.csv',
     'security/delivery_security.xml',
     'data/sequence_data.xml',
@@ -17,6 +17,7 @@
     'views/ethio_route_views.xml',
     'views/dashboard_views.xml',
     'views/menu.xml',
+    'reports/delivery_note_report.xml',
 ],
     'installable': True,
     'application': False,

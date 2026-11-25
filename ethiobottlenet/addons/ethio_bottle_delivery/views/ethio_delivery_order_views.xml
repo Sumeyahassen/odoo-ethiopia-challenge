@@ -30,20 +30,24 @@
         <field name="model">ethio.delivery.order</field>
         <field name="arch" type="xml">
             <form string="Delivery Order">
-                <header>
-                    <button name="action_assign" string="Assign" type="object"
-                            invisible="state != 'draft'" class="btn-primary"/>
-                    <button name="action_start_transit" string="Start Transit" type="object"
-                            invisible="state != 'assigned'" class="btn-primary"/>
-                    <button name="action_deliver" string="Mark Delivered" type="object"
-                            invisible="state != 'in_transit'" class="btn-primary"/>
-                    <button name="action_cancel" string="Cancel" type="object"
-                            invisible="state in ('delivered', 'cancelled')"/>
-                    <button name="action_draft" string="Reset to Draft" type="object"
-                            invisible="state != 'cancelled'"/>
-                    <field name="state" widget="statusbar"
-                           statusbar_visible="draft,assigned,in_transit,delivered"/>
-                </header>
+ <header>
+        <button name="action_assign" string="Assign" type="object"
+                invisible="state != 'draft'" class="btn-primary"/>
+        <button name="action_start_transit" string="Start Transit" type="object"
+                invisible="state != 'assigned'" class="btn-primary"/>
+        <button name="action_deliver" string="Mark Delivered" type="object"
+                invisible="state != 'in_transit'" class="btn-primary"/>
+        <button name="action_cancel" string="Cancel" type="object"
+                invisible="state in ('delivered', 'cancelled')"/>
+        <button name="action_draft" string="Reset to Draft" type="object"
+                invisible="state != 'cancelled'"/>
+        <button name="%(ethio_bottle_delivery.action_report_delivery_note)d"
+                string="Print Delivery Note"
+                type="action"
+                class="btn-secondary"/>
+        <field name="state" widget="statusbar"
+            statusbar_visible="draft,assigned,in_transit,delivered"/>
+</header>
                 <sheet>
                     <div class="oe_title">
                         <h1>
