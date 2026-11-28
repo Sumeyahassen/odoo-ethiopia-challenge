@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_ethio_delivery" model="ir.ui.view">
+        <field name="name">sale.order.form.ethio.delivery</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button name="action_create_ethio_delivery"
+                        type="object"
+                        string="Create Delivery Order"
+                        class="btn-primary"
+                        invisible="state not in ('sale', 'done')"/>
+                <button name="action_view_ethio_deliveries"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-truck"
+                        invisible="ethio_delivery_count == 0">
+                    <field name="ethio_delivery_count" widget="statinfo" string="Deliveries"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
